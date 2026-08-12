@@ -1,0 +1,149 @@
+[
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/v1/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.LoginRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.AuthController",
+    "Method": "ObtenerPerfil",
+    "RelativePath": "api/v1/Auth/perfil",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/v1/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.RegisterRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.ProyectosController",
+    "Method": "GetProyectos",
+    "RelativePath": "api/v1/Proyectos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.ProyectosController",
+    "Method": "CrearProyecto",
+    "RelativePath": "api/v1/Proyectos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.ProyectoCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.ProyectosController",
+    "Method": "EditarProyecto",
+    "RelativePath": "api/v1/Proyectos/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.ProyectoCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.ProyectosController",
+    "Method": "EliminarProyecto",
+    "RelativePath": "api/v1/Proyectos/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.TareasController",
+    "Method": "CrearTarea",
+    "RelativePath": "api/v1/proyectos/{projectId}/tareas",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.TareaCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.TareasController",
+    "Method": "CambiarEstadoTarea",
+    "RelativePath": "api/v1/tareas/{id}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.TareaEstadoUpdateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
