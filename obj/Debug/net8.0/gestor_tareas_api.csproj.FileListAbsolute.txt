@@ -146,3 +146,4 @@ C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\ne
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\gestor_tareas_api.genruntimeconfig.cache
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\ref\gestor_tareas_api.dll
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\gestor_tareas_api.sourcelink.json

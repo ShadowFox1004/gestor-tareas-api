@@ -64,8 +64,18 @@ namespace gestor_tareas_api.Controllers
                 return Unauthorized(new { mensaje = "Credenciales incorrectas." });
             }
 
-            // 2. Verificar la contraseña
-            var result = _passwordHasher.VerifyHashedPassword(usuario, usuario.PasswordHash, request.Password);
+            // 2. Verificar la contraseña (con protección contra hashes corruptos)
+            PasswordVerificationResult result;
+            try
+            {
+                result = _passwordHasher.VerifyHashedPassword(usuario, usuario.PasswordHash, request.Password);
+            }
+            catch (FormatException)
+            {
+                // Si el texto en la BD no es un hash válido (como nuestro dato semilla), lo tratamos como login fallido
+                return Unauthorized(new { mensaje = "Credenciales incorrectas." });
+            }
+
             if (result == PasswordVerificationResult.Failed)
             {
                 return Unauthorized(new { mensaje = "Credenciales incorrectas." });

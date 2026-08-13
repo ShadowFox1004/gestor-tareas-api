@@ -1,5 +1,37 @@
 [
   {
+    "ContainingType": "gestor_tareas_api.Controllers.AdjuntosController",
+    "Method": "DescargarAdjunto",
+    "RelativePath": "api/v1/adjuntos/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.AdjuntosController",
+    "Method": "EliminarAdjunto",
+    "RelativePath": "api/v1/adjuntos/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "gestor_tareas_api.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/v1/Auth/login",
@@ -36,6 +68,22 @@
       {
         "Name": "request",
         "Type": "gestor_tareas_api.DTOs.RegisterRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.ComentariosController",
+    "Method": "EliminarComentario",
+    "RelativePath": "api/v1/comentarios/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -105,6 +153,84 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "gestor_tareas_api.Controllers.ProyectosController",
+    "Method": "InvitarMiembro",
+    "RelativePath": "api/v1/Proyectos/{id}/miembros",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.InvitarMiembroDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.ProyectosController",
+    "Method": "RemoverMiembro",
+    "RelativePath": "api/v1/Proyectos/{id}/miembros/{miembroId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "miembroId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.TareasController",
+    "Method": "ObtenerTareasPaginadas",
+    "RelativePath": "api/v1/proyectos/{projectId}/tareas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "estado",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "prioridad",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "gestor_tareas_api.Controllers.TareasController",
     "Method": "CrearTarea",
     "RelativePath": "api/v1/proyectos/{projectId}/tareas",
@@ -120,6 +246,85 @@
       {
         "Name": "request",
         "Type": "gestor_tareas_api.DTOs.TareaCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.TareasController",
+    "Method": "EditarTarea",
+    "RelativePath": "api/v1/tareas/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.TareaCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.TareasController",
+    "Method": "EliminarTarea",
+    "RelativePath": "api/v1/tareas/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.AdjuntosController",
+    "Method": "SubirAdjunto",
+    "RelativePath": "api/v1/tareas/{id}/adjuntos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "archivo",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.ComentariosController",
+    "Method": "AgregarComentario",
+    "RelativePath": "api/v1/tareas/{id}/comentarios",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "gestor_tareas_api.DTOs.ComentarioCreateDTO",
         "IsRequired": true
       }
     ],
