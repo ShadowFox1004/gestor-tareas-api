@@ -1,4 +1,4 @@
-﻿using gestor_tareas_api.Models;
+using gestor_tareas_api.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace gestor_tareas_api.DTOs
@@ -32,5 +32,30 @@ namespace gestor_tareas_api.DTOs
 
         [Required]
         public RolProyecto Rol { get; set; } // Debería ser Editor o Viewer
+    }
+
+    public class ActualizarRolMiembroDTO
+    {
+        [Required]
+        public RolProyecto Rol { get; set; }
+    }
+
+    public class ProyectoDetalleDTO
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Descripción { get; set; }
+        public string Color { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public string RolUsuarioActual { get; set; }
+        public List<MiembroDetalleDTO> Miembros { get; set; }
+    }
+
+    public class MiembroDetalleDTO
+    {
+        public int UsuarioId { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
+        public string Rol { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using gestor_tareas_api.Models;
 
 namespace gestor_tareas_api.Data
@@ -13,6 +13,7 @@ namespace gestor_tareas_api.Data
         public DbSet<Tarea> Tareas { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Adjunto> Adjuntos { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -49,6 +50,17 @@ namespace gestor_tareas_api.Data
             modelBuilder.Entity<Usuario>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            // 3. Configurar RefreshToken
+            modelBuilder.Entity<RefreshToken>()
+                .HasIndex(rt => rt.Token)
+                .IsUnique();
+
+            modelBuilder.Entity<RefreshToken>()
+                .HasOne(rt => rt.Usuario)
+                .WithMany()
+                .HasForeignKey(rt => rt.UsuarioId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Datos semilla
             // Usuarios

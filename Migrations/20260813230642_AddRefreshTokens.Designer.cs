@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gestor_tareas_api.Data;
 
@@ -11,9 +12,11 @@ using gestor_tareas_api.Data;
 namespace gestor_tareas_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260813230642_AddRefreshTokens")]
+    partial class AddRefreshTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,7 +165,7 @@ namespace gestor_tareas_api.Migrations
                             Id = 1,
                             Color = "#FF5733",
                             Descripción = "Proyecto Capstone final",
-                            FechaCreacion = new DateTime(2026, 8, 13, 23, 48, 10, 171, DateTimeKind.Utc).AddTicks(4608),
+                            FechaCreacion = new DateTime(2026, 8, 13, 23, 6, 42, 47, DateTimeKind.Utc).AddTicks(328),
                             Nombre = "Sistema Trello Clon",
                             PropietarioId = 1
                         },
@@ -171,7 +174,7 @@ namespace gestor_tareas_api.Migrations
                             Id = 2,
                             Color = "#33FF57",
                             Descripción = "Proyecto de revisión",
-                            FechaCreacion = new DateTime(2026, 8, 13, 23, 48, 10, 171, DateTimeKind.Utc).AddTicks(4609),
+                            FechaCreacion = new DateTime(2026, 8, 13, 23, 6, 42, 47, DateTimeKind.Utc).AddTicks(329),
                             Nombre = "Auditoría de Software",
                             PropietarioId = 2
                         });
@@ -323,9 +326,6 @@ namespace gestor_tareas_api.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImagenPerfil")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -347,7 +347,7 @@ namespace gestor_tareas_api.Migrations
                         {
                             Id = 1,
                             Email = "rayber@admin.com",
-                            FechaRegistro = new DateTime(2026, 8, 13, 23, 48, 10, 171, DateTimeKind.Utc).AddTicks(4488),
+                            FechaRegistro = new DateTime(2026, 8, 13, 23, 6, 42, 47, DateTimeKind.Utc).AddTicks(200),
                             Nombre = "Rayber",
                             PasswordHash = "hash_temporal_123"
                         },
@@ -355,7 +355,7 @@ namespace gestor_tareas_api.Migrations
                         {
                             Id = 2,
                             Email = "merali@user.com",
-                            FechaRegistro = new DateTime(2026, 8, 13, 23, 48, 10, 171, DateTimeKind.Utc).AddTicks(4490),
+                            FechaRegistro = new DateTime(2026, 8, 13, 23, 6, 42, 47, DateTimeKind.Utc).AddTicks(239),
                             Nombre = "Merali",
                             PasswordHash = "hash_temporal_456"
                         });

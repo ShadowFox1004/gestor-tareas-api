@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
@@ -84,6 +84,44 @@ namespace gestor_tareas_api.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { mensaje = "Proyecto creado exitosamente", id = nuevoProyecto.Id });
+        }
+
+        // GET: /api/v1/proyectos/{id}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProyectoDetalle(int id)
+        {
+            var userId = ObtenerUsuarioId();
+
+            var proyecto = await _context.Proyectos
+                .Include(p => p.Miembros)
+                    .ThenInclude(m => m.Usuario)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (proyecto == null)
+                return NotFound(new { mensaje = "Proyecto no encontrado." });
+
+            bool tieneAcceso = proyecto.PropietarioId == userId || proyecto.Miembros.Any(m => m.UsuarioId == userId);
+            if (!tieneAcceso)
+                return StatusCode(403, new { mensaje = "No tienes acceso a este proyecto." });
+
+            var response = new ProyectoDetalleDTO
+            {
+                Id = proyecto.Id,
+                Nombre = proyecto.Nombre,
+                Descripción = proyecto.Descripción,
+                Color = proyecto.Color,
+                FechaCreacion = proyecto.FechaCreacion,
+                RolUsuarioActual = proyecto.PropietarioId == userId ? "Owner" : proyecto.Miembros.First(m => m.UsuarioId == userId).Rol.ToString(),
+                Miembros = proyecto.Miembros.Select(m => new MiembroDetalleDTO
+                {
+                    UsuarioId = m.UsuarioId,
+                    Nombre = m.Usuario.Nombre,
+                    Email = m.Usuario.Email,
+                    Rol = m.Rol.ToString()
+                }).ToList()
+            };
+
+            return Ok(response);
         }
 
         // PUT: /api/v1/proyectos/{id}
@@ -213,6 +251,41 @@ namespace gestor_tareas_api.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { mensaje = "Miembro removido exitosamente." });
+        }
+
+        // PUT: /api/v1/proyectos/{id}/miembros/{miembroId}
+        [HttpPut("{id}/miembros/{miembroId}")]
+        public async Task<IActionResult> ActualizarRolMiembro(int id, int miembroId, [FromBody] ActualizarRolMiembroDTO request)
+        {
+            var currentUserId = ObtenerUsuarioId();
+            var proyecto = await _context.Proyectos.FindAsync(id);
+
+            if (proyecto == null) return NotFound(new { mensaje = "Proyecto no encontrado." });
+
+            // Solo el Owner puede cambiar roles
+            if (proyecto.PropietarioId != currentUserId)
+                return StatusCode(403, new { mensaje = "Solo el propietario puede modificar roles de los miembros." });
+
+            // No se puede cambiar el rol del Owner (él mismo)
+            if (proyecto.PropietarioId == miembroId)
+                return BadRequest(new { mensaje = "No se puede modificar el rol del propietario." });
+
+            var membresia = await _context.MiembrosProyectos
+                .FirstOrDefaultAsync(m => m.ProyectoId == id && m.UsuarioId == miembroId);
+
+            if (membresia == null)
+                return NotFound(new { mensaje = "El usuario no es miembro de este proyecto." });
+
+            // No permitir cambiar a Owner a través de esta ruta
+            if (request.Rol == RolProyecto.Owner)
+            {
+                return BadRequest(new { mensaje = "No se puede establecer el rol a Owner." });
+            }
+
+            membresia.Rol = request.Rol;
+            await _context.SaveChangesAsync();
+
+            return Ok(new { mensaje = "Rol de miembro actualizado exitosamente." });
         }
     }
 }

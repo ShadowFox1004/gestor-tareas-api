@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore;
+using System.Text;
 using gestor_tareas_api.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,12 +39,13 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddHealthChecks();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirReact", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // La URL exacta de tu frontend en Vite
+        policy.WithOrigins("http://localhost:5173") // La URL exacta del frontend en Vite
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -88,6 +89,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+app.UseMiddleware<gestor_tareas_api.Middleware.GlobalExceptionMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -99,10 +102,24 @@ app.UseHttpsRedirection();
 
 app.UseCors("PermitirReact");
 
+// Crear la carpeta Uploads si no existe para evitar errores en Startup
+var uploadPath = Path.Combine(builder.Environment.ContentRootPath, "Uploads");
+if (!Directory.Exists(uploadPath))
+{
+    Directory.CreateDirectory(uploadPath);
+}
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(uploadPath),
+    RequestPath = "/Uploads"
+});
+
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHealthChecks("/health");
 
 app.Run();

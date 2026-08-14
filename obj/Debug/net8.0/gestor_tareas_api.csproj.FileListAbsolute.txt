@@ -138,7 +138,6 @@ C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\ne
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\gestor_t.6D98077B.Up2Date
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\gestor_tareas_api.dll
 C:\Users\ASUS\source\Local Proyects\Gestor_Tareas\gestor_tareas_api\obj\Debug\net8.0\refint\gestor_tareas_api.dll

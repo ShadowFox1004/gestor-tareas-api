@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gestor_tareas_api.Models
@@ -16,6 +16,8 @@ namespace gestor_tareas_api.Models
 
         [Required]
         public string PasswordHash { get; set; }
+
+        public string? ImagenPerfil { get; set; }
 
         public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
 

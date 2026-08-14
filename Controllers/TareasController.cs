@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
@@ -32,6 +32,7 @@ namespace gestor_tareas_api.Controllers
             int projectId,
             [FromQuery] EstadoTarea? estado,
             [FromQuery] PrioridadTarea? prioridad,
+            [FromQuery] int? asignadoAId,
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10)
         {
@@ -54,6 +55,9 @@ namespace gestor_tareas_api.Controllers
             // 2. Construir la consulta base
             var query = _context.Tareas
                 .Include(t => t.AsignadoA)
+                .Include(t => t.Adjuntos)
+                .Include(t => t.Comentarios)
+                    .ThenInclude(c => c.Usuario)
                 .Where(t => t.ProyectoId == projectId)
                 .AsQueryable();
 
@@ -63,6 +67,9 @@ namespace gestor_tareas_api.Controllers
 
             if (prioridad.HasValue)
                 query = query.Where(t => t.Prioridad == prioridad.Value);
+
+            if (asignadoAId.HasValue)
+                query = query.Where(t => t.AsignadoAId == asignadoAId.Value);
 
             // 4. Calcular el total de elementos (crucial para armar la botonera de paginación en React)
             var totalItems = await query.CountAsync();
@@ -81,7 +88,23 @@ namespace gestor_tareas_api.Controllers
                     Estado = t.Estado.ToString(),
                     Prioridad = t.Prioridad.ToString(),
                     FechaVencimiento = t.FechaVencimiento,
-                    AsignadoA = t.AsignadoA != null ? t.AsignadoA.Nombre : "Sin asignar"
+                    AsignadoA = t.AsignadoA != null ? t.AsignadoA.Nombre : "Sin asignar",
+                    AsignadoAId = t.AsignadoAId,
+                    Adjuntos = t.Adjuntos.Select(a => new AdjuntoResponseDTO
+                    {
+                        Id = a.Id,
+                        NombreArchivo = a.NombreArchivo,
+                        RutaArchivo = "/Uploads/" + a.RutaRelativa
+                    }).ToList(),
+                    Comentarios = t.Comentarios.Select(c => new ComentarioResponseDTO
+                    {
+                        Id = c.Id,
+                        Contenido = c.Contenido,
+                        FechaCreacion = c.FechaCreacion,
+                        UsuarioId = c.UsuarioId,
+                        NombreUsuario = c.Usuario != null ? c.Usuario.Nombre : "Usuario desconocido",
+                        EmailUsuario = c.Usuario != null ? c.Usuario.Email : "Sin correo"
+                    }).ToList()
                 })
                 .ToListAsync();
 

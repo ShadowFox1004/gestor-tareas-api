@@ -350,5 +350,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "gestor_tareas_api.Controllers.UsuariosController",
+    "Method": "BuscarUsuarios",
+    "RelativePath": "api/v1/Usuarios/buscar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

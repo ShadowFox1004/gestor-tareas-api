@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace gestor_tareas_api.DTOs
 {
@@ -23,7 +23,21 @@ namespace gestor_tareas_api.DTOs
     public class AuthResponseDTO
     {
         public string Token { get; set; }
-        // Aquí luego agregaremos el RefreshToken
+        public string RefreshToken { get; set; }
         public string Mensaje { get; set; }
+    }
+
+    public class RefreshRequestDTO
+    {
+        [Required]
+        public string Token { get; set; }
+        [Required]
+        public string RefreshToken { get; set; }
+    }
+
+    public class LogoutRequestDTO
+    {
+        [Required]
+        public string RefreshToken { get; set; }
     }
 }
