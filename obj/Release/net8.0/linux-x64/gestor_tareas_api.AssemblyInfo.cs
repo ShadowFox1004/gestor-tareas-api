@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gestor_tareas_api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c18a22284a8211a94f81b9bcb42716b533cf9cbb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+302662076a8fc0fe0e22c7d5b87f1044e29d3e04")]
 [assembly: System.Reflection.AssemblyProductAttribute("gestor_tareas_api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gestor_tareas_api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
