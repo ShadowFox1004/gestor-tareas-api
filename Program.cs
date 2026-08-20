@@ -45,8 +45,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirReact", policy =>
     {
-        // Agregamos tanto el localhost (para cuando se programa) como tu Vercel (para produccion)
-        policy.WithOrigins("http://localhost:5173", "https://gestor-tareas-spa-nu.vercel.app")
+        policy.WithOrigins("http://localhost:5173", "https://gestor-tareas-spa-nu.vercel.app", "https://titodo.vercel.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
