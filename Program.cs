@@ -45,7 +45,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirReact", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // La URL exacta del frontend en Vite
+        // Agregamos tanto el localhost (para cuando se programa) como tu Vercel (para produccion)
+        policy.WithOrigins("http://localhost:5173", "https://gestor-tareas-spa-nu.vercel.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
